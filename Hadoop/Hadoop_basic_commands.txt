@@ -1,0 +1,244 @@
+start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+Starting namenodes on [localhost]
+hduser@localhost's password: 
+localhost: starting namenode, logging to /usr/local/hadoop/logs/hadoop-hduser-namenode-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting datanode, logging to /usr/local/hadoop/logs/hadoop-hduser-datanode-bmsce-Precision-T1700.out
+Starting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password: 
+0.0.0.0: starting secondarynamenode, logging to /usr/local/hadoop/logs/hadoop-hduser-secondarynamenode-bmsce-Precision-T1700.out
+starting yarn daemons
+starting resourcemanager, logging to /usr/local/hadoop/logs/yarn-hduser-resourcemanager-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting nodemanager, logging to /usr/local/hadoop/logs/yarn-hduser-nodemanager-bmsce-Precision-T1700.out
+hduser@bmsce-Precision-T1700:~$ jps
+5072 SecondaryNameNode
+4674 NameNode
+4856 DataNode
+5563 NodeManager
+6507 Jps
+5231 ResourceManager
+hduser@bmsce-Precision-T1700:~$ ls
+ derby.log                                      Pictures
+ Desktop                                        pig_1564816082257.log
+ Documents                                      pig_1599215374374.log
+ Downloads                                      pt
+ examples.desktop                               PT72Installer
+ first.text                                     Public
+ hadoop-2.6.0.tar.gz                            R
+ hive                                           TCPclient.py
+ lol                                            TCPserver.py
+ metastore_db                                   Templates
+ Music                                          toinstalledlist
+ newfile.txt                                    UDPclient.py
+ newnewfile.txt                                 UDPserver.py
+'Packet Tracer 7.2.1 for Linux 64 bit.tar.gz'   Videos
+hduser@bmsce-Precision-T1700:~$ /home/desktop
+bash: /home/desktop: No such file or directory
+hduser@bmsce-Precision-T1700:~$ /home/Desktop
+bash: /home/Desktop: No such file or directory
+hduser@bmsce-Precision-T1700:~$ cd desktop
+bash: cd: desktop: No such file or directory
+hduser@bmsce-Precision-T1700:~$ cd Desktop
+hduser@bmsce-Precision-T1700:~/Desktop$ cd ..
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mkdir ~/Desktop/Ishan
+mkdir: `/home/hduser/Desktop/Ishan': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mkdir /abc
+hduser@bmsce-Precision-T1700:~$ ls
+ derby.log                                      Pictures
+ Desktop                                        pig_1564816082257.log
+ Documents                                      pig_1599215374374.log
+ Downloads                                      pt
+ examples.desktop                               PT72Installer
+ first.text                                     Public
+ hadoop-2.6.0.tar.gz                            R
+ hive                                           TCPclient.py
+ lol                                            TCPserver.py
+ metastore_db                                   Templates
+ Music                                          toinstalledlist
+ newfile.txt                                    UDPclient.py
+ newnewfile.txt                                 UDPserver.py
+'Packet Tracer 7.2.1 for Linux 64 bit.tar.gz'   Videos
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /
+Found 7 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:52 /SharmaJi
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:34 /abc
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:44 /bhavana
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:22 /lochan
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:45 /u1
+-rw-r--r--   1 hduser supergroup         19 2022-05-31 11:01 /user
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:08 /vallisha
+hduser@bmsce-Precision-T1700:~$ cat newfile.txt
+SharmaJi
+KhanwaJi
+PaiJI
+Kasturba
+pandeyji
+patilwa
+Nairwa
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put /home/hduser/newfile.txt /abc/ishan.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs cat /abc/ishan.txt
+cat: Unknown command
+Did you mean -cat?  This command begins with a dash.
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /abc/ishan.txt
+SharmaJi
+KhanwaJi
+PaiJI
+Kasturba
+pandeyji
+patilwa
+Nairwa
+hduser@bmsce-Precision-T1700:~$ cat newnewfile.txt
+SharmaJi
+KhanwaJi
+PaiJI
+Kasturba
+pandeyji
+patilwa
+Nairwa
+hduser@bmsce-Precision-T1700:~$ cat > ishan.txt
+Hello
+This is a new text file
+^C
+hduser@bmsce-Precision-T1700:~$ cat ishan.txt
+Hello
+This is a new text file
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyFromLocal /home/hduser/ishan.txt /abc/ishan2.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /abc/ishan2.txt
+Hello
+This is a new text file
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -get /abc/ishan2.txt /home/hduser/ishan2_copy.txt
+hduser@bmsce-Precision-T1700:~$ ls
+ derby.log            'Packet Tracer 7.2.1 for Linux 64 bit.tar.gz'
+ Desktop               Pictures
+ Documents             pig_1564816082257.log
+ Downloads             pig_1599215374374.log
+ examples.desktop      pt
+ first.text            PT72Installer
+ hadoop-2.6.0.tar.gz   Public
+ hive                  R
+ ishan2_copy.txt       TCPclient.py
+ ishan.txt             TCPserver.py
+ lol                   Templates
+ metastore_db          toinstalledlist
+ Music                 UDPclient.py
+ newfile.txt           UDPserver.py
+ newnewfile.txt        Videos
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -getmerge /abc/ishan.txt /abc/ishan2.txt /home/hduser/ishan_merge.txt
+hduser@bmsce-Precision-T1700:~$ ls
+ derby.log            'Packet Tracer 7.2.1 for Linux 64 bit.tar.gz'
+ Desktop               Pictures
+ Documents             pig_1564816082257.log
+ Downloads             pig_1599215374374.log
+ examples.desktop      pt
+ first.text            PT72Installer
+ hadoop-2.6.0.tar.gz   Public
+ hive                  R
+ ishan2_copy.txt       TCPclient.py
+ ishan_merge.txt       TCPserver.py
+ ishan.txt             Templates
+ lol                   toinstalledlist
+ metastore_db          UDPclient.py
+ Music                 UDPserver.py
+ newfile.txt           Videos
+ newnewfile.txt
+hduser@bmsce-Precision-T1700:~$ ishan_merge.txt
+ishan_merge.txt: command not found
+hduser@bmsce-Precision-T1700:~$ cat ishan_merge.txt
+SharmaJi
+KhanwaJi
+PaiJI
+Kasturba
+pandeyji
+patilwa
+Nairwa
+Hello
+This is a new text file
+hduser@bmsce-Precision-T1700:~$ hadoop fs -getfacl /abc/
+# file: /abc
+# owner: hduser
+# group: supergroup
+user::rwx
+group::r-x
+other::r-x
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyToLocal /abc/ishan.txt /home/hduser/Desktop
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /
+Found 7 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:52 /SharmaJi
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:40 /abc
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:44 /bhavana
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:22 /lochan
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:45 /u1
+-rw-r--r--   1 hduser supergroup         19 2022-05-31 11:01 /user
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:08 /vallisha
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mkdir /ishan
+hduser@bmsce-Precision-T1700:~$ hadoop fs -mv /abc /ishan
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /ishan
+Found 1 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:40 /ishan/abc
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /abc
+ls: `/abc': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /
+Found 7 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:52 /SharmaJi
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:44 /bhavana
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:59 /ishan
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:22 /lochan
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:45 /u1
+-rw-r--r--   1 hduser supergroup         19 2022-05-31 11:01 /user
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:08 /vallisha
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat/ishan.txt
+-cat/ishan.txt: Unknown command
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /ishan.txt
+cat: `/ishan.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /ishan/ishan.txt
+cat: `/ishan/ishan.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /vallisha
+Found 1 items
+-rw-r--r--   1 hduser supergroup         13 2022-06-01 09:52 /vallisha/sample1.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /ishan/abc
+Found 2 items
+-rw-r--r--   1 hduser supergroup         57 2022-06-04 09:37 /ishan/abc/ishan.txt
+-rw-r--r--   1 hduser supergroup         30 2022-06-04 09:40 /ishan/abc/ishan2.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /ishan/ishan.txt
+cat: `/ishan/ishan.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /ishan/abc/ishan.txt
+SharmaJi
+KhanwaJi
+PaiJI
+Kasturba
+pandeyji
+patilwa
+Nairwa
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cp /vallisha/sample1.txt /ishan
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /ishan
+Found 2 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:40 /ishan/abc
+-rw-r--r--   1 hduser supergroup         13 2022-06-04 10:07 /ishan/sample1.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /ishan/sample1.txt
+sample1 text
+hduser@bmsce-Precision-T1700:~$ sudo nano new_file.txt
+[sudo] password for hduser: 
+hduser@bmsce-Precision-T1700:~$ ls
+ derby.log             newnewfile.txt
+ Desktop              'Packet Tracer 7.2.1 for Linux 64 bit.tar.gz'
+ Documents             Pictures
+ Downloads             pig_1564816082257.log
+ examples.desktop      pig_1599215374374.log
+ first.text            pt
+ hadoop-2.6.0.tar.gz   PT72Installer
+ hive                  Public
+ ishan2_copy.txt       R
+ ishan_merge.txt       TCPclient.py
+ ishan.txt             TCPserver.py
+ lol                   Templates
+ metastore_db          toinstalledlist
+ Music                 UDPclient.py
+ new_file.txt          UDPserver.py
+ newfile.txt           Videos
+hduser@bmsce-Precision-T1700:~$ cat new_file.txt
+This is a new file, created using sudo nano
+
+
